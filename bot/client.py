@@ -1,16 +1,12 @@
-from binance.client import Client
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from binance.um_futures import UMFutures
 
 load_dotenv()
 
-API_KEY = os.getenv("BINANCE_API_KEY")
-API_SECRET = os.getenv("BINANCE_SECRET_KEY")
-
-client = Client(API_KEY, API_SECRET)
-
-# Binance Futures Testnet URL
-client.FUTURES_URL = "https://testnet.binancefuture.com/fapi"
-
 def get_client():
-    return client
+    return UMFutures(
+        key=os.getenv("BINANCE_API_KEY"),
+        secret=os.getenv("BINANCE_SECRET_KEY"),
+        base_url="https://testnet.binancefuture.com"
+    )
